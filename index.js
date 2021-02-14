@@ -104,8 +104,16 @@ const httpServer = http.createServer((req, res) => {
 });
 
 
-const io = socket(httpsServer);
-io.set('origins', '*:*');
+// const io = socket(httpsServer);
+
+const io = require("socket.io")(httpsServer, {
+  cors: {
+    origin: "https://markeybass.com",
+    methods: ["GET", "POST"],
+    allowedHeaders: ["my-custom-header"],
+    // credentials: true
+  }
+});
 
 io.on('connection', (socket) => {
   console.log('socket is connected', socket.id);
