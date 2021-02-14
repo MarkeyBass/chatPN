@@ -89,9 +89,9 @@ const httpsServer = https.createServer(creds, (req, res) => {
 });
 
 
-const httpPORT = 5002;
+const httpPORT = 5003;
 
-const httpsPORT = 8002
+const httpsPORT = 8003
 
 const httpServer = http.createServer((req, res) => {
   // set cors
