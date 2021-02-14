@@ -4,6 +4,7 @@ const path = require("path");
 const fs = require("fs");
 const url = require('url');
 const socket = require('socket.io');
+const cors = require('cors');
 
 // const socketListening = require('./socket');
 
@@ -21,6 +22,9 @@ const creds = {
 } 
 
 const httpsServer = https.createServer(creds, (req, res) => {
+  //  cors
+  res.setHeader('Access-Control-Allow-Headers', req.header.origin);
+
   // Build file path
   let filePath = path.join(
     __dirname,
@@ -90,6 +94,8 @@ const httpPORT = 5002;
 const httpsPORT = 8002
 
 const httpServer = http.createServer((req, res) => {
+  // set cors
+  res.setHeader('Access-Control-Allow-Headers', req.header.origin);
   const myurl = url.parse(req.url);               // important
   res.writeHead(301, { location: `https://markeybass.com:${httpsPORT}${myurl.pathname}`})
   res.end();
