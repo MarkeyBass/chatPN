@@ -108,7 +108,7 @@ const httpServer = http.createServer((req, res) => {
 
 const io = require("socket.io")(httpsServer, {
   cors: {
-    origin: "https://markeybass.com",
+    origin: "https://markeybass.com:8003",
     methods: ["GET", "POST"],
     allowedHeaders: ["my-custom-header"],
     // credentials: true
