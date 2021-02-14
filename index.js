@@ -104,10 +104,8 @@ const httpServer = http.createServer((req, res) => {
 });
 
 
-
-
-
 const io = socket(httpsServer);
+io.set('origins', '*:*');
 
 io.on('connection', (socket) => {
   console.log('socket is connected', socket.id);
