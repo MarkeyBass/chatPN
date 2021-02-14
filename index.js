@@ -95,7 +95,6 @@ const httpsPORT = 8003
 
 const httpServer = http.createServer((req, res) => {
   // set cors
-  res.setHeader({ 'Access-Control-Allow-Headers': '*' });
   const myurl = url.parse(req.url);               // important
   res.writeHead(301, { location: `https://markeybass.com:${httpsPORT}${myurl.pathname}`, 'Access-Control-Allow-Headers': '*' })
   res.end();
