@@ -23,7 +23,10 @@ const creds = {
 
 const httpsServer = https.createServer(creds, (req, res) => {
   //  cors
-  res.writeHead({ 'Access-Control-Allow-Headers': '*' });
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Request-Method', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
+  res.setHeader('Access-Control-Allow-Headers', '*');
 
   // Build file path
   let filePath = path.join(
@@ -96,7 +99,7 @@ const httpsPORT = 8003
 const httpServer = http.createServer((req, res) => {
   // set cors
   const myurl = url.parse(req.url);               // important
-  res.writeHead(301, { location: `https://markeybass.com:${httpsPORT}${myurl.pathname}`, 'Access-Control-Allow-Headers': '*' })
+  res.writeHead(301, { location: `https://markeybass.com:${httpsPORT}${myurl.pathname}` })
   res.end();
 });
 
