@@ -20,5 +20,5 @@ const socketListening = io.on('connection', (socket) => {
   });
 });
 
-module.exports = socketListening;
+module.exports = { socketListening };
 

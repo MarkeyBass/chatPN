@@ -89,7 +89,7 @@ const httpPORT = 5002;
 
 const httpsPORT = 8002
 
-const httpServer = http.createServer(creds, (req, res) => {
+const httpServer = http.createServer((req, res) => {
   const myurl = url.parse(req.url);               // important
   res.writeHead(301, { location: `https://markeybass.com:${httpsPORT}${myurl.pathname}`})
   res.end();
@@ -97,26 +97,26 @@ const httpServer = http.createServer(creds, (req, res) => {
 
 
 
-httpServer.listen(httpPORT, () => console.log(`Server running on port ${httpPORT}`));
-httpsServer.listen(httpsPORT, () => console.log(`Server running on port ${httpsPORT}`));
 
 
 const io = socket(httpsServer);
 
 io.on('connection', (socket) => {
   console.log('socket is connected', socket.id);
-
+  
   // hendle chat event
   socket.on('chat', (data) => {
     // console.log(data)
     // referring all computers conected to the socket
     io.sockets.emit('chat', data);
   });
-    
+  
   socket.on('typing', (data) => {
     socket.broadcast.emit('typing', data)
   });
 });
 
 
+httpServer.listen(httpPORT, () => console.log(`Server running on port ${httpPORT}`));
+httpsServer.listen(httpsPORT, () => console.log(`Server running on port ${httpsPORT}`));
 
