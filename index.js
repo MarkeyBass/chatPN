@@ -4,7 +4,7 @@ const path = require("path");
 const fs = require("fs");
 const url = require('url');
 const socket = require('socket.io');
-// const cors = require('cors');
+const cors = require('cors');
 
 // REDIRECTION TO HTTPS
 
@@ -21,10 +21,10 @@ const creds = {
 
 const httpsServer = https.createServer(creds, (req, res) => {
   //  cors
-  // res.setHeader('Access-Control-Allow-Origin', '*');
-  // res.setHeader('Access-Control-Request-Method', '*');
-  // res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
-  // res.setHeader('Access-Control-Allow-Headers', '*');
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Request-Method', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
+  res.setHeader('Access-Control-Allow-Headers', '*');
 
   // Build file path
   let filePath = path.join(
@@ -103,16 +103,16 @@ const httpServer = http.createServer((req, res) => {
 
 
 
-// const io = require("socket.io")(httpsServer, {
-//   cors: {
-//     origin: "https://markeybass.com:8003",
-//     methods: ["GET", "POST"],
-//     allowedHeaders: ["my-custom-header"],
-//     // credentials: true
-//   }
-// });
+const io = require("socket.io")(httpsServer, {
+  cors: {
+    origin: "https://markeybass.com:8003",
+    methods: ["GET", "POST"],
+    allowedHeaders: ["my-custom-header"],
+    // credentials: true
+  }
+});
 
-const io = socket(httpsServer);
+// const io = socket(httpsServer);
 
 io.on('connection', (socket) => {
   console.log('socket is connected', socket.id);
