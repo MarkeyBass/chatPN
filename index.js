@@ -4,9 +4,7 @@ const path = require("path");
 const fs = require("fs");
 const url = require('url');
 const socket = require('socket.io');
-const cors = require('cors');
-
-// const socketListening = require('./socket');
+// const cors = require('cors');
 
 // REDIRECTION TO HTTPS
 
@@ -104,16 +102,17 @@ const httpServer = http.createServer((req, res) => {
 });
 
 
-// const io = socket(httpsServer);
 
-const io = require("socket.io")(httpsServer, {
-  cors: {
-    origin: "https://markeybass.com:8003",
-    methods: ["GET", "POST"],
-    allowedHeaders: ["my-custom-header"],
-    // credentials: true
-  }
-});
+// const io = require("socket.io")(httpsServer, {
+//   cors: {
+//     origin: "https://markeybass.com:8003",
+//     methods: ["GET", "POST"],
+//     allowedHeaders: ["my-custom-header"],
+//     // credentials: true
+//   }
+// });
+
+const io = socket(httpsServer);
 
 io.on('connection', (socket) => {
   console.log('socket is connected', socket.id);
