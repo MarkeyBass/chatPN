@@ -1,5 +1,5 @@
 // Make connection
-const socket = io.connect('https://45.9.190.107:8003');
+const socket = io.connect('https://markeybass.com:8003');
 
 // DOM Manipulations
 const header = document.querySelector('header');
